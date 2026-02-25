@@ -1,0 +1,155 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: hsl(0, 14%, 96%); /* Dark background */
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background: rgba(50, 51, 51, 0.9);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: hsl(46, 90%, 45%); /* Gold Color */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #d4af37;
+}
+
+/* Hero Section */
+.hero {
+    height:200vh;
+    background:url('image/background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+.hero p {
+    font-size: 1.5rem;
+    color: black;
+}
+
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #2214ea;
+    color: rgb(246, 243, 243);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Menu Grid */
+.container {
+    padding: 80px 10%;
+    color:#100690;
+}
+.p{
+    color: hsl(246, 80%, 33%);
+    font-family: italic;
+}
+.h1{
+    color: #d4d10b;
+    font-family: 'Playfair Display', serif;
+}
+
+.section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    color: #d4af37;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.menu-card {
+    background: #262626;
+    padding: 25px;
+    transition: transform 0.3s;
+}
+
+.menu-card:hover {
+    transform: translateY(-10px);
+}
+
+.price {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #d4af37;
+    font-size: 1.2rem;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    background: #246f7c;
+}
+.service-card {
+    background: #f7ecec;
+    padding: 25px;
+    transition: transform 0.3s;
+}
+.service-card:hover {
+    transform: translateY(-10px);
+}
+.about{
+    background: #f7ecec;
+    padding: 25px;
+    margin-top: 40px;
+    color:#000;
+    text-align: center;
+
+}
+.about p{
+    color: black;
+    font-family: italic;
+}
