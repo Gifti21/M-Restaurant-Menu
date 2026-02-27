@@ -7,8 +7,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: hsl(0, 14%, 96%); /* Dark background */
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     line-height: 1.6;
 }
 
@@ -48,10 +48,8 @@ nav ul li a:hover {
 
 /* Hero Section */
 .hero {
-    height:200vh;
-    background:url('image/background.jpg');
-    background-size: cover;
-    background-position: center;
+    height: 100vh;
+    background: url('image/background.jpg') center/cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,7 +87,7 @@ nav ul li a:hover {
 }
 .p{
     color: hsl(246, 80%, 33%);
-    font-family: italic;
+    font-style: italic;
 }
 .h1{
     color: #d4d10b;
@@ -108,6 +106,8 @@ nav ul li a:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
+    transition: transform 0.3s;
+    
 }
 
 .menu-card {
@@ -136,11 +136,25 @@ footer {
 .service-card {
     background: #f7ecec;
     padding: 25px;
-    transition: transform 0.3s;
+    transition: transform 0.3s, background-color 0.3s;
+    border-radius: 10px;
 }
 .service-card:hover {
     transform: translateY(-10px);
+    background-color: #d0eff0;
 }
+
+.hot-drinks:hover,
+.cultural-drinks:hover,
+.special-food:hover,
+.alcoholic-drinks:hover,
+.soft-drinks:hover,
+.juice-drinks:hover,
+.desserts:hover {
+    transform: translateY(-10px);
+    background-color: #d0eff0;
+}
+
 .about{
     background: #f7ecec;
     padding: 25px;
@@ -151,7 +165,7 @@ footer {
 }
 .about p{
     color: black;
-    font-family: italic;
+    font-style: italic;
 }
 .menu-details h1{
     color: #d4af37;
@@ -166,7 +180,7 @@ footer {
     width: 100%;
 }
 .menu-details{
-    background: #f7ecec;
+    background: #d0eff0;
     padding: 25px;
     margin-top: 40px;
     color:#000;
@@ -174,10 +188,72 @@ footer {
 }
 .menu-details p{
     color:#2214ea;
-    font-family:italic;
+    font-style: italic;
+    font-weight: bold;
 }
-.img{
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
+.service-image{
+    width:100%;
+    height:auto;
+    border-radius:8px;
+    display:block;
+    margin:12px auto;
+}
+.btn button{
+    background:#2214ea;
+    color:#fff;
+    border:0;
+    padding:10px 16px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.soft-drinks li{
+    color: black;
+    font-style: italic;
+    font-size: 1.2rem;
+    text-align: left;
+}
+.special-food{
+    border-radius:20px;
+
+
+}
+.special-food:hover{
+    background-color:white;
+    transform: translateY(-10px);
+}
+.pizza{
+    background: #d0eff0;
+    padding: 25px;
+    margin-top: 40px;
+    color:#000;
+    text-align: center; 
+    border-radius: 20px;
+}
+.burger{
+    background: #d0eff0;
+    padding: 25px;
+    margin-top: 40px;
+    color:#000;
+    text-align: center; 
+    border-radius: 20px;
+}
+.soft-drinks{
+    background: #d0eff0;
+    padding: 25px;
+    margin-top: 40px;
+    color:#000;
+    text-align: center; 
+    border-radius: 20px;
+}
+.juice-drinks:hover {
+    background-color:#d0eff0;
+    transform: translateY(-10px);
+}
+.alcoholic-drinks{
+    background: #d0eff0;
+    padding: 25px;
+    margin-top: 40px;
+    color:#000;
+    text-align: center; 
+    border-radius: 20px;
 }
