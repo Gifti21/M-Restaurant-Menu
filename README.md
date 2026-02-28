@@ -58,22 +58,20 @@ Edit the footer section in `index.html` (around line 90)
 ### To Update Menu:
 Edit the `menuData` array in `script.js` (starting at line 17)
 
-## 📱 Deployment Options
+## 📱 Deployment
 
-### Option 1: Netlify (Recommended)
-1. Go to https://app.netlify.com/drop
-2. Drag your project folder
-3. Get your live URL instantly!
+### Deploy to Vercel (Recommended):
+1. Go to https://vercel.com/new
+2. Sign up (free)
+3. Drag your project folder
+4. Click "Deploy"
+5. Get your live URL!
 
-### Option 2: GitHub Pages
-1. Create GitHub repository
-2. Upload files
-3. Enable Pages in settings
+See `DEPLOYMENT.md` for detailed instructions.
 
-### Option 3: Vercel
-1. Sign up at vercel.com
-2. Import project
-3. Deploy
+### Alternative Options:
+- Netlify: https://app.netlify.com/drop
+- GitHub Pages: Enable in repository settings
 
 ## 🎯 Menu Categories
 

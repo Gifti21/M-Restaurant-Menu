@@ -1,9 +1,11 @@
-// EmailJS Configuration
-// IMPORTANT: You need to set up EmailJS account and replace these values
+// M-Restaurant Ordering System
+// Email: medhanitmedi344@gmail.com | Phone: +251 938675525
+
+// EmailJS Configuration (Optional - for automatic email sending)
 const EMAILJS_CONFIG = {
-    serviceID: 'YOUR_SERVICE_ID',  // Replace with your EmailJS service ID
-    templateID: 'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
-    publicKey: 'YOUR_PUBLIC_KEY'    // Replace with your EmailJS public key
+    serviceID: 'YOUR_SERVICE_ID',
+    templateID: 'YOUR_TEMPLATE_ID',
+    publicKey: 'YOUR_PUBLIC_KEY'
 };
 
 // Initialize EmailJS
