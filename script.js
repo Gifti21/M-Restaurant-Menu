@@ -553,94 +553,42 @@ function autoSendOrder() {
 // Gmail Fallback - Opens Gmail with order details
 // Gmail Fallback - Opens Gmail with order details
 // Gmail Fallback - Opens Gmail with order details
+// Gmail Fallback - Mobile-optimized version
 function sendViaGmailFallback(data) {
-  // Create simple, clear text format (easy to read, hard to accidentally edit)
-  const orderText = `
-═══════════════════════════════════════
-    🍽️ M-RESTAURANT - NEW ORDER
-═══════════════════════════════════════
+    // Simplified order text for mobile
+    const orderText = `M-RESTAURANT ORDER #${Date.now().toString().slice(-6)}
 
-ORDER ID: #${Date.now().toString().slice(-6)}
-DATE: ${new Date().toLocaleString()}
+Customer: ${data.name}
+Phone: ${data.phone}
+Email: ${data.email || 'None'}
 
-───────────────────────────────────────
-CUSTOMER INFORMATION
-───────────────────────────────────────
-Name:     ${data.name}
-Phone:    ${data.phone}
-Email:    ${data.email || "Not provided"}
+Service: ${data.deliveryOption === 'delivery' ? 'DELIVERY' : 'DINE-IN'}
+${data.deliveryOption === 'delivery' ? 'Address: ' + data.address : 'Table: ' + (data.tableNumber || 'Not specified')}
 
-───────────────────────────────────────
-SERVICE DETAILS
-───────────────────────────────────────
-Type:     ${data.deliveryOption === "delivery" ? "🚚 DELIVERY" : "🍽️ DINE-IN"}
-${data.deliveryOption === "delivery" ? `Address:  ${data.address}` : `Table:    ${data.tableNumber || "Not specified"}`}
+Items:
+${cart.map(item => `${item.name} x${item.quantity} = ${item.price * item.quantity} ETB`).join('\n')}
 
-───────────────────────────────────────
-ORDER ITEMS
-───────────────────────────────────────
-${cart.map((item) => `${item.name.padEnd(20)} x ${item.quantity}    ${(item.price * item.quantity).toString().padStart(6)} ETB`).join("\n")}
+TOTAL: ${data.total} ETB
 
-───────────────────────────────────────
-TOTAL:                           ${data.total} ETB
-═══════════════════════════════════════
+${data.instructions ? 'Instructions: ' + data.instructions : ''}
 
-${
-  data.instructions
-    ? `
-SPECIAL INSTRUCTIONS:
-${data.instructions}
+M-Restaurant, Adama | +251 938675525`;
 
-───────────────────────────────────────
-`
-    : ""
-}
+    // Simpler Gmail URL
+    const gmailURL = `https://mail.google.com/mail/?view=cm&to=medhanitmedi344@gmail.com&su=Order%20${Date.now().toString().slice(-6)}&body=${encodeURIComponent(orderText)}`;
 
-📍 M-Restaurant, Adama, Ethiopia
-📞 +251 938675525
-📧 medhanitmedi344@gmail.com
+    // Try opening Gmail
+    try {
+        window.location.href = gmailURL;
 
-═══════════════════════════════════════
-    `.trim();
-
-  // Encode for Gmail URL
-  const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=medhanitmedi344@gmail.com&su=${encodeURIComponent("🍽️ ORDER #" + Date.now().toString().slice(-6) + " - " + data.name)}&body=${encodeURIComponent(orderText)}`;
-
-  // Open Gmail immediately
-  const gmailWindow = window.open(gmailURL, "_blank");
-
-  // Check if popup was blocked
-  if (
-    !gmailWindow ||
-    gmailWindow.closed ||
-    typeof gmailWindow.closed == "undefined"
-  ) {
-    alert(
-      "⚠️ Popup Blocked!\n\n" +
-        "Your browser blocked the Gmail window.\n\n" +
-        "Please:\n" +
-        "1. Allow popups for this site\n" +
-        "2. Or click OK to open Gmail in this tab",
-    );
-    window.location.href = gmailURL;
-  } else {
-    showNotification(
-      "📧 Gmail opened! Please click SEND to complete your order.",
-      5000,
-    );
-
-    setTimeout(() => {
-      const sent = confirm(
-        "✅ Did you send the email in Gmail?\n\n" +
-          "Click OK if you sent it.\n" +
-          "Click Cancel if you need more time.",
-      );
-
-      if (sent) {
-        completeOrder();
-      }
-    }, 4000);
-  }
+        setTimeout(() => {
+            if (confirm('Did you send the email?\n\nClick OK if sent.')) {
+                completeOrder();
+            }
+        }, 5000);
+    } catch (error) {
+        alert('Please call to order:\n+251 938675525\n\nOr email:\nmedhanitmedi344@gmail.com');
+    }
 }
 
 // Setup Event Listeners
