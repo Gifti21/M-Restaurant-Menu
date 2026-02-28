@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Restaurant - Order Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">M-Restaurant</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cart-btn" id="cartBtn">
+                <span>🛒 Cart</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to M-Restaurant</h1>
+            <p>Authentic Ethiopian Cuisine & International Favorites</p>
+            <a href="#menu" class="btn btn-primary">Order Now</a>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="ethiopian">Ethiopian Food</button>
+                <button class="category-btn" data-category="special">Special Food</button>
+                <button class="category-btn" data-category="drinks">Drinks</button>
+                <button class="category-btn" data-category="desserts">Desserts</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid"></div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <p><strong>M-Restaurant</strong> is a family-owned establishment serving delicious meals with heart and tradition. We specialize in authentic Ethiopian cuisine alongside international favorites, providing a memorable dining experience with exceptional food, drinks, and service.</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>🍽️ Quality Food</h3>
+                    <p>Fresh ingredients, traditional recipes</p>
+                </div>
+                <div class="feature">
+                    <h3>🚚 Fast Delivery</h3>
+                    <p>Quick delivery to your doorstep</p>
+                </div>
+                <div class="feature">
+                    <h3>💯 Best Service</h3>
+                    <p>Customer satisfaction guaranteed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <p>📧 Email: <a href="mailto:medhanitmedi344@gmail.com">medhanitmedi344@gmail.com</a></p>
+                <p>📞 Phone: <a href="tel:+251938675525">+251 938675525</a></p>
+                <p>📍 Address: Adama, Ethiopia</p>
+            </div>
+            <p class="copyright">&copy; 2024 M-Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Order</h2>
+                <button class="close-btn" id="closeCart">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+                <div class="cart-total">
+                    <h3>Total: <span id="cartTotal">0</span> ETB</h3>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="clearCart">Clear Cart</button>
+                <button class="btn btn-primary" id="checkoutBtn">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Complete Your Order</h2>
+                <button class="close-btn" id="closeCheckout">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="customerName">Full Name *</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number *</label>
+                        <input type="tel" id="customerPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerEmail">Email</label>
+                        <input type="email" id="customerEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Option *</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="deliveryOption" value="delivery" checked>
+                                🚚 Delivery
+                            </label>
+                            <label>
+                                <input type="radio" name="deliveryOption" value="dine-in">
+                                🍽️ Dine-in
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="addressGroup">
+                        <label for="deliveryAddress">Delivery Address *</label>
+                        <textarea id="deliveryAddress" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group" id="tableGroup" style="display: none;">
+                        <label for="tableNumber">Table Number (Optional)</label>
+                        <input type="text" id="tableNumber" placeholder="e.g., Table 5">
+                    </div>
+                    <div class="form-group">
+                        <label for="specialInstructions">Special Instructions</label>
+                        <textarea id="specialInstructions" rows="2"></textarea>
+                    </div>
+                    <div class="order-summary">
+                        <h3>Order Summary</h3>
+                        <div id="checkoutItems"></div>
+                        <div class="summary-total">
+                            <strong>Total: <span id="checkoutTotal">0</span> ETB</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Send Order Via *</label>
+                        <div class="order-method-buttons">
+                            <button type="button" class="btn btn-whatsapp" id="sendWhatsApp">
+                                <span class="icon">📱</span> Send via WhatsApp
+                            </button>
+                            <button type="button" class="btn btn-email" id="sendEmail">
+                                <span class="icon">📧</span> Send via Email
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
