@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
+    background-color: hwb(200 98% 1%);
     color: #333;
     line-height: 1.6;
 }
@@ -291,7 +291,7 @@ nav {
 
 /* Footer */
 footer {
-    background: #1a1a1a;
+    background: #272b01;
     color: white;
     padding: 60px 0 30px;
     text-align: center;
@@ -521,57 +521,70 @@ footer {
 
 /* Order Method Buttons */
 .order-method-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 15px;
     margin-top: 10px;
 }
 
-.btn-whatsapp {
-    background: #25D366;
+.btn-auto-send {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    padding: 15px;
+    font-weight: 700;
 }
 
-.btn-whatsapp:hover {
-    background: #1fb855;
+.btn-auto-send:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #63408a 100%);
+    transform: scale(1.02);
 }
 
-.btn-email {
-    background: #EA4335;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 1rem;
+.btn-auto-send .icon {
+    font-size: 1.5rem;
 }
 
-.btn-email:hover {
-    background: #d33426;
-}
-
-.btn-whatsapp .icon,
-.btn-email .icon {
-    font-size: 1.3rem;
+.help-text {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+    nav {
+        padding: 10px 5%;
+    }
+    
+    .logo {
+        font-size: 1.4rem;
+    }
+    
     .nav-links {
         display: none;
     }
     
+    .cart-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .hero {
+        height: 70vh;
+        padding: 0 15px;
+    }
+    
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
     .hero-content p {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
     
     .section-title {
@@ -580,13 +593,143 @@ footer {
     
     .menu-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .menu-categories {
+        gap: 8px;
+    }
+    
+    .category-btn {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .modal {
+        padding: 10px;
     }
     
     .modal-content {
-        margin: 20px;
+        margin: 10px;
+        max-height: 95vh;
+    }
+    
+    .modal-header {
+        padding: 15px 20px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.4rem;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-footer {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
     }
     
     .order-method-buttons {
+        gap: 12px;
+    }
+    
+    .btn-auto-send {
+        font-size: 1rem;
+        padding: 12px;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .cart-item-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .features {
         grid-template-columns: 1fr;
+    }
+    
+    .contact-info {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    .cart-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .cart-count {
+        width: 20px;
+        height: 20px;
+        font-size: 0.75rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .menu-item h3 {
+        font-size: 1.1rem;
+    }
+    
+    .menu-item p {
+        font-size: 0.85rem;
+    }
+    
+    .price {
+        font-size: 1.1rem;
+    }
+    
+    .add-to-cart {
+        padding: 6px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .btn-auto-send {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+    
+    .help-text {
+        font-size: 0.8rem;
     }
 }

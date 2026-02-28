@@ -6,6 +6,8 @@
     <title>M-Restaurant - Order Online</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- EmailJS for automatic email sending -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <header>
@@ -157,13 +159,11 @@
                     <div class="form-group">
                         <label>Send Order Via *</label>
                         <div class="order-method-buttons">
-                            <button type="button" class="btn btn-whatsapp" id="sendWhatsApp">
-                                <span class="icon">📱</span> Send via WhatsApp
-                            </button>
-                            <button type="button" class="btn btn-email" id="sendEmail">
-                                <span class="icon">📧</span> Send via Email
+                            <button type="button" class="btn btn-primary btn-auto-send" id="autoSendOrder">
+                                <span class="icon">✉️</span> Send Order Automatically
                             </button>
                         </div>
+                        <p class="help-text">✅ Order will be sent automatically to the restaurant!</p>
                     </div>
                 </form>
             </div>
@@ -171,5 +171,11 @@
     </div>
 
     <script src="script.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY"); // We'll configure this
+        })();
+    </script>
 </body>
 </html>

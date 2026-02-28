@@ -1,3 +1,18 @@
+// EmailJS Configuration
+// IMPORTANT: You need to set up EmailJS account and replace these values
+const EMAILJS_CONFIG = {
+    serviceID: 'YOUR_SERVICE_ID',  // Replace with your EmailJS service ID
+    templateID: 'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+    publicKey: 'YOUR_PUBLIC_KEY'    // Replace with your EmailJS public key
+};
+
+// Initialize EmailJS
+(function() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+    }
+})();
+
 // Menu Data
 const menuData = [
     // Ethiopian Food
@@ -240,73 +255,7 @@ function getOrderData() {
     };
 }
 
-// Send Order via WhatsApp
-function sendViaWhatsApp() {
-    if (!validateCheckoutForm()) return;
 
-    const data = getOrderData();
-
-    const whatsappMessage = `
-*New Order from M-Restaurant*
-
-*Customer Details:*
-Name: ${data.name}
-Phone: ${data.phone}
-${data.email ? `Email: ${data.email}` : ''}
-
-*Service Option:* ${data.deliveryOption === 'delivery' ? '🚚 Delivery' : '🍽️ Dine-in'}
-${data.deliveryOption === 'delivery' ? `Delivery Address: ${data.address}` : `Table Number: ${data.tableNumber || 'Not specified'}`}
-
-*Order Details:*
-${data.orderDetails}
-
-*Total: ${data.total} ETB*
-
-${data.instructions ? `Special Instructions: ${data.instructions}` : ''}
-    `.trim();
-
-    // Replace with your restaurant's WhatsApp number (include country code without + sign)
-    // Example: 251938675525 for Ethiopian number
-    const whatsappNumber = '251938675525';
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-
-    window.open(whatsappURL, '_blank');
-
-    completeOrder();
-}
-
-// Send Order via Email
-function sendViaEmail() {
-    if (!validateCheckoutForm()) return;
-
-    const data = getOrderData();
-
-    const emailBody = `
-New Order from M-Restaurant
-
-Customer Details:
-Name: ${data.name}
-Phone: ${data.phone}
-Email: ${data.email || 'Not provided'}
-
-Service Option: ${data.deliveryOption === 'delivery' ? 'Delivery' : 'Dine-in'}
-${data.deliveryOption === 'delivery' ? `Delivery Address: ${data.address}` : `Table Number: ${data.tableNumber || 'Not specified'}`}
-
-Order Details:
-${data.orderDetails}
-
-Total: ${data.total} ETB
-
-Special Instructions:
-${data.instructions || 'None'}
-    `.trim();
-
-    const mailtoLink = `mailto:medhanitmedi344@gmail.com?subject=New Order from ${data.name}&body=${encodeURIComponent(emailBody)}`;
-
-    window.location.href = mailtoLink;
-
-    completeOrder();
-}
 
 // Complete Order
 function completeOrder() {
@@ -319,6 +268,144 @@ function completeOrder() {
         showNotification('Order sent successfully! We will contact you soon.');
     }, 1000);
 }
+// Send Order Automatically via EmailJS
+// Send Order Automatically via EmailJS
+// Send Order Automatically via EmailJS
+// Send Order Automatically via EmailJS
+function autoSendOrder() {
+    if (!validateCheckoutForm()) return;
+
+    const data = getOrderData();
+
+    // Check if EmailJS is configured
+    if (EMAILJS_CONFIG.serviceID === 'YOUR_SERVICE_ID' ||
+        EMAILJS_CONFIG.templateID === 'YOUR_TEMPLATE_ID' ||
+        EMAILJS_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
+
+        // EmailJS not configured - use Gmail fallback
+        sendViaGmailFallback(data);
+        return;
+    }
+
+    // Show loading
+    showNotification('📤 Sending your order...', 10000);
+
+    // Prepare email template parameters
+    const templateParams = {
+        to_email: 'medhanitmedi344@gmail.com',
+        customer_name: data.name,
+        customer_phone: data.phone,
+        customer_email: data.email || 'Not provided',
+        service_option: data.deliveryOption === 'delivery' ? '🚚 Delivery' : '🍽️ Dine-in',
+        delivery_info: data.deliveryOption === 'delivery' ? data.address : `Table: ${data.tableNumber || 'Not specified'}`,
+        order_items: data.orderDetails,
+        total_amount: data.total + ' ETB',
+        special_instructions: data.instructions || 'None',
+        order_date: new Date().toLocaleString()
+    };
+
+    // Send email using EmailJS
+    emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            showNotification('✅ Order sent successfully! We will contact you soon.');
+            completeOrder();
+        }, function(error) {
+            console.error('FAILED...', error);
+            alert(
+                '❌ Failed to send order. Please try again or contact us directly at:\n\n' +
+                '📧 Email: medhanitmedi344@gmail.com\n' +
+                '📞 Phone: +251 938675525'
+            );
+        });
+}
+
+// Gmail Fallback - Opens Gmail with order details
+// Gmail Fallback - Opens Gmail with order details
+// Gmail Fallback - Opens Gmail with order details
+// Gmail Fallback - Opens Gmail with order details
+function sendViaGmailFallback(data) {
+    // Create simple, clear text format (easy to read, hard to accidentally edit)
+    const orderText = `
+═══════════════════════════════════════
+    🍽️ M-RESTAURANT - NEW ORDER
+═══════════════════════════════════════
+
+ORDER ID: #${Date.now().toString().slice(-6)}
+DATE: ${new Date().toLocaleString()}
+
+───────────────────────────────────────
+CUSTOMER INFORMATION
+───────────────────────────────────────
+Name:     ${data.name}
+Phone:    ${data.phone}
+Email:    ${data.email || 'Not provided'}
+
+───────────────────────────────────────
+SERVICE DETAILS
+───────────────────────────────────────
+Type:     ${data.deliveryOption === 'delivery' ? '🚚 DELIVERY' : '🍽️ DINE-IN'}
+${data.deliveryOption === 'delivery' ? `Address:  ${data.address}` : `Table:    ${data.tableNumber || 'Not specified'}`}
+
+───────────────────────────────────────
+ORDER ITEMS
+───────────────────────────────────────
+${cart.map(item => `${item.name.padEnd(20)} x ${item.quantity}    ${(item.price * item.quantity).toString().padStart(6)} ETB`).join('\n')}
+
+───────────────────────────────────────
+TOTAL:                           ${data.total} ETB
+═══════════════════════════════════════
+
+${data.instructions ? `
+SPECIAL INSTRUCTIONS:
+${data.instructions}
+
+───────────────────────────────────────
+` : ''}
+
+📍 M-Restaurant, Adama, Ethiopia
+📞 +251 938675525
+📧 medhanitmedi344@gmail.com
+
+═══════════════════════════════════════
+    `.trim();
+
+    // Encode for Gmail URL
+    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=medhanitmedi344@gmail.com&su=${encodeURIComponent('🍽️ ORDER #' + Date.now().toString().slice(-6) + ' - ' + data.name)}&body=${encodeURIComponent(orderText)}`;
+
+    // Open Gmail immediately
+    const gmailWindow = window.open(gmailURL, '_blank');
+
+    // Check if popup was blocked
+    if (!gmailWindow || gmailWindow.closed || typeof gmailWindow.closed == 'undefined') {
+        alert(
+            '⚠️ Popup Blocked!\n\n' +
+            'Your browser blocked the Gmail window.\n\n' +
+            'Please:\n' +
+            '1. Allow popups for this site\n' +
+            '2. Or click OK to open Gmail in this tab'
+        );
+        window.location.href = gmailURL;
+    } else {
+        showNotification('📧 Gmail opened! Please click SEND to complete your order.', 5000);
+
+        setTimeout(() => {
+            const sent = confirm(
+                '✅ Did you send the email in Gmail?\n\n' +
+                'Click OK if you sent it.\n' +
+                'Click Cancel if you need more time.'
+            );
+
+            if (sent) {
+                completeOrder();
+            }
+        }, 4000);
+    }
+}
+
+
+
+
 
 // Setup Event Listeners
 function setupEventListeners() {
@@ -350,11 +437,8 @@ function setupEventListeners() {
         document.getElementById('checkoutModal').classList.remove('active');
     });
     
-    // WhatsApp button
-    document.getElementById('sendWhatsApp').addEventListener('click', sendViaWhatsApp);
-    
-    // Email button
-    document.getElementById('sendEmail').addEventListener('click', sendViaEmail);
+    // Auto Send Order button
+    document.getElementById('autoSendOrder').addEventListener('click', autoSendOrder);
     
     // Delivery option toggle
     document.querySelectorAll('input[name="deliveryOption"]').forEach(radio => {
