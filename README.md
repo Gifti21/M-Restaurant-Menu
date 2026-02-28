@@ -8,7 +8,6 @@ A professional restaurant website with online ordering functionality for M-Resta
 - **Shopping Cart** - Customers can add multiple items
 - **Order Management** - Delivery and Dine-in options
 - **Email Ordering** - Orders sent directly to restaurant email
-- **Mobile Responsive** - Works perfectly on all devices
 - **Professional Design** - Clean, modern interface
 
 ## � Project Structure
@@ -29,10 +28,6 @@ M-Restaurant/
 2. Browse the menu and add items to cart
 3. Test the ordering process
 
-### For Deployment:
-1. Upload all files to a hosting service (Netlify, GitHub Pages, etc.)
-2. Share the URL with your customers
-3. Start receiving orders!
 
 ## 📧 Order System
 
@@ -67,12 +62,6 @@ Edit the `menuData` array in `script.js` (starting at line 17)
 4. Click "Deploy"
 5. Get your live URL!
 
-See `DEPLOYMENT.md` for detailed instructions.
-
-### Alternative Options:
-- Netlify: https://app.netlify.com/drop
-- GitHub Pages: Enable in repository settings
-
 ## 🎯 Menu Categories
 
 - Ethiopian Traditional Food (Doro Wat, Kitfo, Tibs, etc.)
@@ -80,12 +69,6 @@ See `DEPLOYMENT.md` for detailed instructions.
 - Drinks (Juices, Coffee, Tea, etc.)
 - Desserts (Cake, Ice Cream, Chocolate)
 
-## 💡 Optional Upgrade
-
-For fully automatic email sending (no Gmail opening):
-- Configure EmailJS (free service)
-- Follow setup instructions in documentation
-- 200 free emails per month
 
 ## 📞 Support
 
