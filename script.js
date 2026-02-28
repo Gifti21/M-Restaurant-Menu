@@ -484,6 +484,11 @@ function completeOrder() {
     document.getElementById("checkoutModal").classList.remove("active");
     document.getElementById("checkoutForm").reset();
     showNotification("Order sent successfully! We will contact you soon.");
+    
+    // Refresh page after 2 seconds to reset everything
+    setTimeout(() => {
+      location.reload();
+    }, 2000);
   }, 1000);
 }
 // Send Order Automatically via EmailJS
